@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import './question.dart';
+import './answer.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,10 +13,12 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var questionIndex = 0;
+  var agesIndex = 0;
 
   void answerquestion() {
     setState(() {
       questionIndex = questionIndex + 1;
+      agesIndex = agesIndex + 1;
     });
     print(questionIndex);
   }
@@ -25,8 +29,10 @@ class _MyAppState extends State<MyApp> {
       'What\'s your Name?',
       'How old are you?',
       'From where you are?',
+      'Are you single?',
       'What\'s your favourite color?'
     ];
+    var ages = [10, 20, 30, 40, 50];
 
     return MaterialApp(
       home: Scaffold(
@@ -35,21 +41,8 @@ class _MyAppState extends State<MyApp> {
           ),
           body: Column(
             children: [
-              Text(questions[questionIndex]),
-              RaisedButton(
-                child: Text('Answer 1'),
-                onPressed: () {
-                  answerquestion();
-                },
-              ),
-              RaisedButton(
-                child: const Text('Answer 2'),
-                onPressed: null,
-              ),
-              RaisedButton(
-                child: const Text('Answer 3'),
-                onPressed: null,
-              ),
+              Questions(questions[questionIndex], ages[agesIndex]),
+              Answer(answerquestion),
             ],
           )),
     );
