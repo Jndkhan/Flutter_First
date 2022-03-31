@@ -5,7 +5,7 @@ import './answer.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
- const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -13,12 +13,16 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var questionIndex = 0;
-  var agesIndex = 0;
 
   void answerquestion() {
+    /*Display changes on Screen through this method*/
     setState(() {
-      questionIndex = questionIndex + 1;
-      agesIndex = agesIndex + 1;
+      if(questionIndex == 4){
+        questionIndex = 0;
+      }
+      else{
+        questionIndex = questionIndex + 1;
+      }
     });
     print(questionIndex);
   }
@@ -32,8 +36,6 @@ class _MyAppState extends State<MyApp> {
       'Are you single?',
       'What\'s your favourite color?'
     ];
-    var ages = [10, 20, 30, 40, 50];
-
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(
@@ -41,7 +43,7 @@ class _MyAppState extends State<MyApp> {
           ),
           body: Column(
             children: [
-              Questions(questions[questionIndex], ages[agesIndex]),
+              Questions(questions[questionIndex]),
               Answer(answerquestion),
             ],
           )),
