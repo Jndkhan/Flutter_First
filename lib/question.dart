@@ -15,7 +15,7 @@ class Questions extends StatelessWidget {
           style: const TextStyle(
               color: Colors.redAccent,
               fontWeight: FontWeight.bold,
-              fontSize: 40)),
+              fontSize: 30)),
     );
   }
 }
