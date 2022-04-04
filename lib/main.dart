@@ -12,33 +12,59 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var _questionIndex = 0;
-
   /*question array*/
-  static final _questions = const [
+  static final _questions = [
     {
       'questionText': 'What\'s your favourite Color?',
-      'answer': ['Red', 'Green', 'Blue', 'White']
+      'answer': [
+        {'text': 'Red', 'score': 10},
+        {'text': 'Green', 'score': 7},
+        {'text': 'Blue', 'score': 5},
+        {'text': 'White', 'score': 2}
+      ]
     },
     {
       'questionText': 'What\'s your favourite Animal?',
-      'answer': ['Cat', 'Dog', 'Rabbit', 'Lion']
+      'answer': [
+        {'text': 'Lion', 'score': 10},
+        {'text': 'Rabbit', 'score': 7},
+        {'text': 'Dog', 'score': 5},
+        {'text': 'Elephant', 'score': 2}
+      ]
     },
     {
       'questionText': 'What\'s your favourite Number?',
-      'answer': ['1', '2', '3', '4']
+      'answer': [
+        {'text': '1', 'score': 10},
+        {'text': '2', 'score': 7},
+        {'text': '3', 'score': 5},
+        {'text': '4', 'score': 2}
+      ]
     },
     {
       'questionText': 'Your favourite Country?',
-      'answer': ['Pakistan', 'UAE', 'USA', 'UK']
-    },
-    {
-      'questionText': 'Your favourite City?',
-      'answer': ['Islamabad', 'Karachi', 'Lahore', 'Peshawar']
+      'answer': [
+        {'text': 'Pakistan', 'score': 10},
+        {'text': 'UAE', 'score': 7},
+        {'text': 'USA', 'score': 5},
+        {'text': 'UK', 'score': 2}
+      ]
     },
   ];
 
-  void _answerquestion() {
+  var _questionIndex = 0;
+  var _totalScore = 0;
+
+  void _resetQuiz(){
+    setState(() {
+      _questionIndex = 0;
+      _totalScore = 0;
+    });
+  }
+
+  void _answerquestion(int score) {
+    _totalScore = _totalScore + score;
+
     /*Display changes on Screen through this method*/
     setState(() {
       _questionIndex = _questionIndex + 1;
@@ -58,8 +84,8 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Title'),
         ),
         body: _questionIndex < _questions.length
-            ? Quiz(_questions, _questionIndex,_answerquestion)
-            : Result(),
+            ? Quiz(_questions, _questionIndex, _answerquestion)
+            : Result(_totalScore,_resetQuiz),
       ),
     );
   }

@@ -7,7 +7,7 @@ class Quiz extends StatelessWidget {
 
   final List<Map<String, Object>> questions;
   final int questionIndex;
-  final VoidCallback answerquestion;
+  final Function answerquestion;
 
   Quiz(@required this.questions, @required this.questionIndex,
       @required this.answerquestion);
@@ -17,8 +17,8 @@ class Quiz extends StatelessWidget {
     return Column(
       children: [
         Questions(questions[questionIndex]['questionText'] as String),
-        ...(questions[questionIndex]['answer'] as List<String>).map((answer) {
-          return Answer(answerquestion, answer);
+        ...(questions[questionIndex]['answer'] as List<Map<String,Object>>).map((answer) {
+          return Answer(()=>answerquestion(answer['score']),answer['text'] as String);
         }).toList()
       ],
     );

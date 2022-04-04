@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class Answer extends StatelessWidget {
@@ -11,10 +13,13 @@ class Answer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 120,
-      child: RaisedButton(
-        elevation: 10,
-        textColor: Colors.white,
-        color: Colors.lightBlue,
+      child: OutlinedButton(
+        style: OutlinedButton.styleFrom(
+          primary: Colors.orange,
+          textStyle: const TextStyle(
+              fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),
+          side: const BorderSide(color: Colors.orange),
+        ),
         child: Text(answerText),
         onPressed: selectHandler,
       ),
