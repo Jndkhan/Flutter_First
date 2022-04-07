@@ -16,9 +16,9 @@ class Result extends StatelessWidget {
 
     if (resultScore <= 10) {
       resultText = 'you are awesome';
-    } else if (resultScore <= 15) {
-      resultText = 'you are good';
     } else if (resultScore <= 20) {
+      resultText = 'you are good';
+    } else if (resultScore <= 30) {
       resultText = 'you are bad';
     } else {
       resultText = 'you are strange';
@@ -31,6 +31,13 @@ class Result extends StatelessWidget {
     return Center(
       child: Column(
         children: [
+          Text(
+            'Total Score: ' + resultScore.toString(),
+            style: const TextStyle(
+                color: Colors.lightGreenAccent,
+                fontSize: 36,
+                fontWeight: FontWeight.w500),
+          ),
           Container(
             child: Text(
               resultPhrase,
@@ -40,11 +47,11 @@ class Result extends StatelessWidget {
                   fontWeight: FontWeight.w500),
             ),
           ),
-          RaisedButton(
+          ElevatedButton(
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.green),
+                  foregroundColor: MaterialStateProperty.all(Colors.white)),
               child: Text('Reset'),
-              elevation: 12,
-              color: Colors.green,
-              textColor: Colors.white,
               onPressed: resetHandler)
         ],
       ),

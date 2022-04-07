@@ -54,9 +54,11 @@ class _MyAppState extends State<MyApp> {
 
   var _questionIndex = 0;
   var _totalScore = 0;
+  var titleText = 'QuizApp';
 
-  void _resetQuiz(){
+  void _resetQuiz() {
     setState(() {
+      titleText = "QuizApp";
       _questionIndex = 0;
       _totalScore = 0;
     });
@@ -72,6 +74,7 @@ class _MyAppState extends State<MyApp> {
     if (_questionIndex < _questions.length) {
       print("we have more questions");
     } else {
+      titleText = "Final Results";
       print("No more questions");
     }
   }
@@ -79,13 +82,34 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
+        backgroundColor: Colors.black12,
         appBar: AppBar(
-          title: const Text('Title'),
+          backgroundColor: Colors.teal,
+          title: Text(titleText,style: TextStyle(color: Colors.yellow),),
         ),
         body: _questionIndex < _questions.length
-            ? Quiz(_questions, _questionIndex, _answerquestion)
-            : Result(_totalScore,_resetQuiz),
+            ? Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: Text(
+                      'Question Number: ' + (_questionIndex + 1).toString(),
+                      style: TextStyle(color: Colors.teal, fontSize: 30),
+                    ),
+                  ),
+                  Quiz(_questions, _questionIndex, _answerquestion),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Your Score: ' + (_totalScore).toString(),
+                      style: TextStyle(color: Colors.teal, fontSize: 30),
+                    ),
+                  ),
+                ],
+              )
+            : Result(_totalScore, _resetQuiz),
       ),
     );
   }
